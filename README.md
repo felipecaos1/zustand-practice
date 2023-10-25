@@ -1,8 +1,14 @@
-# React + Vite
+# React + TypeScript + Vite + Zustand + TailwindCSS + ReactRouterDom
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un cascarón de proyecto, siéntete libre de usarlo para tus proyectos.
 
-Currently, two official plugins are available:
+<img src="https://github.com/Klerith/zustand-mini-curso/blob/main/public/screenshot.png?raw=true" alt="Dashboard Screenshot">
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+## Instalar
+
+1. Clonar proyecto
+2. Instalar dependencias ```npm install```
+3. Correr en desarrollo ```npm run dev```
+
