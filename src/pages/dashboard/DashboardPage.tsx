@@ -1,7 +1,12 @@
 import { IoAccessibilityOutline, IoHeartOutline, IoListOutline, IoLockClosedOutline, IoPawOutline } from 'react-icons/io5';
 import { WhiteCard } from '../../components';
+import { useBearsStore } from '../../stores/Bears/bears.store';
+import { usePersonStore } from '../../stores/person/person.store';
 
 export const Dashboard = () => {
+  const totalOsos = useBearsStore(state=> state.computed.totalOsos);
+
+  const fullName = usePersonStore(state=>state.computed.fullname);
   return (
     <>
       <h1>Dashboard</h1>
@@ -13,14 +18,14 @@ export const Dashboard = () => {
         <WhiteCard centered>
           <IoPawOutline size={ 50 } className="text-indigo-600" />
           <h2>Osos</h2>
-          <p>Información</p>
+          <p>{totalOsos}</p>
         </WhiteCard>
 
 
         <WhiteCard centered>
           <IoAccessibilityOutline size={ 50 } className="text-indigo-600" />
           <h2>Persona</h2>
-          <p>Información</p>
+          <p>{fullName}</p>
         </WhiteCard>
 
 
