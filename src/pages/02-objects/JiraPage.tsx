@@ -5,7 +5,7 @@ export const JiraPage = () => {
 
   const task = useTaksStore(state => state.tasks);
   const taskDone = useTaksStore(state => state.getTaskbyStatus('done'));
-  const taskInProgress = useTaksStore(state => state.getTaskbyStatus('in-progres'));
+  const taskInProgress = useTaksStore(state => state.getTaskbyStatus('in-progress'));
   const taskOpen = useTaksStore(state => state.getTaskbyStatus('open'));
   console.log(taskDone);
   console.log(taskInProgress);
@@ -18,11 +18,11 @@ export const JiraPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           
-          <JiraTasks title='Pendientes' value='pending' />
+          <JiraTasks title='Pendientes' value='open' task={taskOpen} />
           
-          <JiraTasks title='Avanzando' value='in-progress' />
+          <JiraTasks title='Avanzando' value='in-progress' task={taskInProgress} />
           
-          <JiraTasks title='Terminadas' value='done' />
+          <JiraTasks title='Terminadas' value='done' task={taskDone}/>
 
       </div>
 
