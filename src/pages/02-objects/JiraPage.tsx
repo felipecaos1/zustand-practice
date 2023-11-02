@@ -3,13 +3,10 @@ import { useTaksStore } from '../../stores/task/task.storage';
 
 export const JiraPage = () => {
 
-  const task = useTaksStore(state => state.tasks);
   const taskDone = useTaksStore(state => state.getTaskbyStatus('done'));
   const taskInProgress = useTaksStore(state => state.getTaskbyStatus('in-progress'));
   const taskOpen = useTaksStore(state => state.getTaskbyStatus('open'));
-  console.log(taskDone);
-  console.log(taskInProgress);
-  console.log(taskOpen);
+  
   return (
     <>
       <h1>Tareas</h1>
