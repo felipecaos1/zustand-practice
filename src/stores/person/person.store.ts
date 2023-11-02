@@ -3,6 +3,7 @@ import { persist, createJSONStorage, devtools } from "zustand/middleware";
 
 // import { customeSessionStorage } from "../Storages/sesion-storage.storage"
 import { firebaseStorage } from "../Storages/firebase.storage";
+import { logger } from "../middlewares/logger.middleware";
 interface PersonState {
   firstName: string;
   lastName: string;
@@ -16,7 +17,10 @@ interface Action {
 }
 
 // Extraemos el store para que sea mas legible incluirlo en el persist
-const storeApi: StateCreator<PersonState & Action ,[["zustand/devtools", never]]> = (set, get) => ({
+const storeApi: StateCreator<
+  PersonState & Action,
+  [["zustand/devtools", never]]
+> = (set, get) => ({
   firstName: "",
   lastName: "",
 
@@ -24,16 +28,20 @@ const storeApi: StateCreator<PersonState & Action ,[["zustand/devtools", never]]
     return get().firstName + " " + get().lastName;
   },
 
-  setFirstName: (value: string) => set((state) => ({ firstName: value }),false,'setnombre'),
-  setLastName: (value: string) => set(() => ({ lastName: value }), false, 'setapellido'),
+  setFirstName: (value: string) =>
+    set((state) => ({ firstName: value }), false, "setnombre"),
+  setLastName: (value: string) =>
+    set(() => ({ lastName: value }), false, "setapellido"),
 });
 
 export const usePersonStore = create<PersonState & Action>()(
-  devtools(
-    persist(storeApi, {
-      name: "person-store",
-      // storage: createJSONStorage(() => customeSessionStorage),
-      storage: createJSONStorage(() => firebaseStorage),
-    })
+  logger(
+    devtools(
+      persist(storeApi, {
+        name: "person-store",
+        // storage: createJSONStorage(() => customeSessionStorage),
+        storage: createJSONStorage(() => firebaseStorage),
+      })
+    )
   )
 );
