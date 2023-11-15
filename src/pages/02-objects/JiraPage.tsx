@@ -7,6 +7,7 @@ export const JiraPage = () => {
   const taskInProgress = useTaksStore(state => state.getTaskbyStatus('in-progress'));
   const taskOpen = useTaksStore(state => state.getTaskbyStatus('open'));
   
+  
   return (
     <>
       <h1>Tareas</h1>

@@ -16,6 +16,7 @@ interface Action {
     getTaskbyStatus:(status:TaskStatus)=>Task[],
     setDraggaId: (id:string) => void,
     removeDraggaId:()=> void,
+    changeProgress:(taskId:string, status:TaskStatus )=>void,
 }
 
 
@@ -40,6 +41,19 @@ const storeApi : StateCreator<TaskState & Action> = (set, get) =>({
 
     removeDraggaId: () => {
         set({draggaId:undefined})
+    },
+
+    changeProgress(taskId, status) {
+
+        const task = get().tasks[taskId];
+        task.status = status;
+
+        set(state => ({
+            tasks:{
+                ...state.tasks,
+                [taskId] : task,
+            }
+        }))
     },
 })
 
