@@ -1,11 +1,12 @@
 import {
   IoCheckmarkCircleOutline,
-  IoEllipsisHorizontalOutline,
+  IoAddOutline,
   
 } from "react-icons/io5";
 import { Task, TaskStatus } from "../../interfaces";
 import { SingleTask } from "./singleTask";
 import { useTaksStore } from '../../stores/task/task.storage';
+import Swal from "sweetalert2";
 import classNames from "classnames";
 import { useState } from "react";
 
@@ -20,6 +21,8 @@ export const JiraTasks = ({ title, value, task }: Props) => {
   const dragingTaskId = useTaksStore( state => state.draggaId); 
   const changeProgress = useTaksStore((state) => state.changeProgress); 
   const removeDraggaId = useTaksStore((state) => state.removeDraggaId); 
+  const addTask = useTaksStore((state) => state.addTask); 
+
   const [OnDragOver,setOnDragOver] = useState(false);
 
   const handleOnDragOver = (event:any) =>{
@@ -36,6 +39,28 @@ export const JiraTasks = ({ title, value, task }: Props) => {
     changeProgress(dragingTaskId!, value);
     removeDraggaId();
   };
+
+  const handleAddTask = async(status:TaskStatus) =>{
+      
+    const rep = await Swal.fire({
+      title:'Nueva Tarea',
+      input:'text',
+      inputLabel:'Nombre de la tarea',
+      inputPlaceholder:'Ingrese el nombre de la tarea',
+      showCancelButton: true,
+      inputValidator: (value) =>{
+        if(!value){
+          return 'Debe ingresar un nombre para la tare'
+        }
+      }
+    });
+
+    console.log(rep, status);
+
+    if(rep.isConfirmed){
+      addTask(rep.value, status);
+    }
+  } 
 
   return (
     <div
@@ -62,8 +87,8 @@ export const JiraTasks = ({ title, value, task }: Props) => {
           <h4 className="ml-4 text-xl font-bold text-navy-700">{title}</h4>
         </div>
 
-        <button>
-          <IoEllipsisHorizontalOutline />
+        <button onClick = {() =>handleAddTask(value)}>
+          <IoAddOutline />
         </button>
       </div>
 
