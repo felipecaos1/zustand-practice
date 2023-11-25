@@ -1,6 +1,6 @@
 import { StateCreator, create } from "zustand";
 import type { Task, TaskStatus } from "../../interfaces";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 
 import {v4 as uuidV4}  from 'uuid';
 
@@ -76,6 +76,8 @@ const storeApi : StateCreator<TaskState & Action> = (set, get) =>({
 
 export const useTaksStore =  create<TaskState & Action>()(
     devtools(
-        storeApi
+        persist(storeApi,{
+            name:'task-storage'
+        })
     )
     );
